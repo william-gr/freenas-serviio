@@ -1,0 +1,18 @@
+#!/bin/sh
+JAIL_IP=`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}')` 
+
+echo $JAIL_IP
+
+JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dderby.system.home=/var/db/serviio -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=%%LOCALBASE%%/bin/ffmpeg"
+
+#JAVA_OPTS="${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}"
+
+#echo $JAVA_OPTS
+
+#while read -r; do devlist[i++]=$REPLY; done < <(sqlite3 /data/freenas-v1.db ".dump" | grep "uuid"| sed -e 's/,.*,/#/g' | sed -e 's/^.*#.//'|sed -e 's/p2.*$//' | sed -e $"s/\');//")
+
+#sed -i '' -e 's/old_string/new_string/' /usr/pbi/serviio-`uname -m`/sbin/serviiod
+
+JAIL_IP=`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}')` 
+sed -i '' -e "21a\\
+JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" serviiod

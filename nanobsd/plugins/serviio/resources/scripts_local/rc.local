@@ -1,0 +1,6 @@
+#!/usr/local/bin/bash
+#
+su - admin -c "/usr/local/JDownloader/jdownloader.sh &> /dev/null"
+#
+#
+(/usr/local/serviio-0.6.2/bin/serviio.sh) &

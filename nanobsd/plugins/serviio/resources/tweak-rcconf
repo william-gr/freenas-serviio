@@ -1,0 +1,8 @@
+#!/bin/sh
+
+serviio_path=/usr/pbi/serviio-$(uname -m)
+tmpfile=$(mktemp /tmp/.XXXXXX)
+
+grep -v 'serviio_' /etc/rc.conf > ${tmpfile}
+cat ${serviio_path}/etc/rc.conf >> ${tmpfile}
+mv ${tmpfile} /etc/rc.conf

@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+
+# PROVIDE: jdownloader
+# REQUIRE: LOGIN
+
+. /etc/rc.subr
+
+: ${jdownloader_enable=NO}
+
+name="jdownloader"
+rcvar=jdownloader_enable
+pidfile="/var/run/jdownloader.pid"
+
+
+load_rc_config ${name}
+start_cmd="jdownloader_start"
+stop_cmd="jdownloader_stop"
+
+jdownloader_stop() {
+	pkill -f jdownloader
+	rm /var/run/jdownloader.pid
+}
+
+
+jdownloader_start() {
+	/usr/pbi/serviio-`uname -m`/etc/local/JDownloader/jdownloader.sh
+	sleep 2
+        pgrep -f jdownloader > /var/run/jdownloader.pid
+	echo "Started with PID" `pgrep -f JDownloader`
+}
+
+run_rc_command "$1"

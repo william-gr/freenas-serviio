@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec /usr/pbi/serviio-$(uname -m)/bin/python /usr/pbi/serviio-$(uname -m)/control.py $*
