@@ -6,16 +6,9 @@
 #
 # Add the following lines to /etc/rc.conf to enable this service:
 #
-# serviio_enable:	     Set to NO by default. Set it to YES to enable it.
-# serviio_watch_dir:	     Directory for torrent files to download
-#			     automatically. Off by default unless you add
-#			     a path.
-# serviio_conf_dir:	     Directory where serviio configuration
-#			     data is stored.
-#			     Default: /usr/pbi/serviio-$(uname -m)/etc/serviio/home
-# serviio_download_dir:	     Directory where Serviio looks for media files to serve
-#			     Default: /usr/pbi/serviio-$(uname -m)/MEDIA
-# serviio_user:		     The user account serviio daemon runs as
+# serviio_enable:            Set to NO by default. Set it to YES to enable it.
+#                            a path.
+# serviio_user:              The user account serviio daemon runs as
 #
 
 . /etc/rc.subr
@@ -23,53 +16,39 @@
 name="serviio"
 rcvar=${name}_enable
 
-#pidfile=/usr/pbi/serviio-$(uname -m)/etc/serviio/serviio.pid
 pidfile=/var/run/serviio.pid
 command=/usr/pbi/serviio-$(uname -m)/sbin/serviiod
-
-echo $command
 
 #load_rc_config ${name}
 load_rc_config $name
 
-#serviio_user=${serviio_user-"dlna"}
-
-
-: ${serviio_enable:="NO"}
-: ${serviio_user:="dlna"}
-: ${serviio_conf_dir="/usr/pbi/serviio-$(uname -m)/etc/serviio/home"}
-: ${serviio_download_dir="/usr/pbi/serviio-$(uname -m)/MEDIA"}
+serviio_user=${serviio_user-"dlna"}
 
 _dirs="/var/db/serviio /var/log/serviio"
-start_precmd="mkdir -p $_dirs; chown $serviio_user $_dirs"
-command_args="$serviio_args"
-
-#command_args="$serviio_args &"
-
-serviio_flags=" \
-	${serviio_watch_dir:+-c ${serviio_watch_dir}} \
-	${serviio_conf_dir:+-g ${serviio_conf_dir}} \
-	${serviio_download_dir:+-w ${serviio_download_dir}} \
-	-x ${pidfile} \
-	${serviio_flags}"
+#start_precmd="mkdir -p $_dirs; chown $serviio_user $_dirs"
+command_args="$serviio_args &"
 
 serviio_stop()
 {
-	res=1
-	echo -n 'Stopping serviio.'
-	if [ -f "${pidfile}" ]
-	then
-		kill -KILL $(cat "${pidfile}")
-		rm -f ${pidfile}
-		res=$?
-	else
-		killall -KILL serviiod
-		res=$?
-	fi
+        res=1
+        echo -n 'Stopping serviio.'
+        if [ -f "${pidfile}" ]
+        then
+                kill -KILL $(cat "${pidfile}")
+                rm -f ${pidfile}
+                res=$?
+        else
+                killall -KILL serviiod
+                res=$?
+        fi
 
-	echo
-	return ${res}
+        echo
+        return ${res}
 }
 
 stop_cmd='serviio_stop'
 run_rc_command "$1"
+
+# Hack to write proper pidfile for serviio
+sleep 2
+pgrep -U dlna -f serviio > /var/run/serviio.pid 2>&1
