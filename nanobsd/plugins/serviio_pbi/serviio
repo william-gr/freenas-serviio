@@ -51,4 +51,4 @@ run_rc_command "$1"
 
 # Hack to write proper pidfile for serviio
 sleep 2
-pgrep -U dlna -f serviio > /var/run/serviio.pid 2>&1
+pgrep -U dlna -f org.serviio.MediaServer > /var/run/serviio.pid
