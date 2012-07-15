@@ -310,10 +310,9 @@ def status(request):
     """
     pid = None
 
-    #Hack to find Serviio process since you can see the argument to java
-    #proc = Popen(["/usr/bin/pgrep -f", "416M"], stdout=PIPE, stderr=PIPE)
+    #proc = Popen(["/usr/bin/pgrep", "-U", "dlna", "-f", "serviio"], stdout=PIPE, stderr=PIPE)
 
-    proc = Popen(["/usr/bin/pgrep -f", "416M"], stdout=PIPE, stderr=PIPE)
+    proc = Popen(["/usr/bin/pgrep -U dlna -f serviio"], stdout=PIPE, stderr=PIPE)
 
     stdout = proc.communicate()[0]
 

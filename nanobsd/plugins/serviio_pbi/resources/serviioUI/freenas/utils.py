@@ -5,7 +5,7 @@ import platform
 serviio_pbi_path = "/usr/pbi/serviio-" + platform.machine()
 serviio_etc_path = os.path.join(serviio_pbi_path, "etc")
 serviio_mnt_path = os.path.join(serviio_pbi_path, "mnt")
-serviio_fcgi_pidfile = "/var/run/serviio_fcgi_server.pid"
+serviio_fcgi_pidfile = "/var/run/serviio.pid"
 serviio_fcgi_wwwdir = os.path.join(serviio_pbi_path, "www")
 serviio_control = "/usr/local/etc/rc.d/serviio"
 serviio_config = os.path.join(serviio_etc_path, "mt-daapd.conf")

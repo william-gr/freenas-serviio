@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(HERE, "lib/python2.7/site-packages"))
 serviio_pbi_path = "/usr/pbi/serviio-" + platform.machine()
 serviio_etc_path = os.path.join(serviio_pbi_path, "etc")
 serviio_mnt_path = os.path.join(serviio_pbi_path, "mnt")
-serviio_fcgi_pidfile = "/var/run/serviio_fcgi_server.pid"
+serviio_fcgi_pidfile = "/var/run/fcgi_serviio.pid"
 serviio_fcgi_wwwdir = os.path.join(serviio_pbi_path, "www")
 serviio_control = "/usr/local/etc/rc.d/serviio"
 

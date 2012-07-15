@@ -105,7 +105,7 @@ class ServiioForm(forms.ModelForm):
             f.write("db_params = %s\n" % ("/var/cache/mt-daapd", ))
             f.write("mp3_dir = %s\n" % (obj.mp3_dir, ))
             f.write("servername = %s\n" % (obj.servername, ))
-            f.write("runas = %s\n" % ("daapd", ))
+            f.write("runas = %s\n" % ("dlna", ))
             f.write("extensions = %s\n" % (obj.extensions, ))
             f.write("logfile = %s\n" % (obj.logfile, ))
             f.write("rescan_interval = %d\n" % (obj.rescan_interval, ))
