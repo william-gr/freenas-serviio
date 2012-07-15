@@ -1,5 +1,5 @@
 #
-# bacula - nanobsd build script for bacula
+# serviio - nanobsd build script for serviio
 #
 
 #
@@ -19,7 +19,7 @@ export PBI_BUILDFLAGS
 #
 # Name of this plugin
 #
-PLUGIN="bacula"
+PLUGIN="serviio"
 
 #
 # Path to pbi_makeport 
@@ -184,7 +184,7 @@ export NANO_NAME NANO_IMGNAME
 
 last_orders()
 {
-	if [ "${bacula_FORCE}" = "1" -o ! -f "${PLUGINOUT}/${PBIFILE}" ]
+	if [ "${serviio_FORCE}" = "1" -o ! -f "${PLUGINOUT}/${PBIFILE}" ]
 	then
 		pprint 2 "Creating PBI"
 		pprint 3 "log: ${PLUGINLOG}"
