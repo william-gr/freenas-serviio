@@ -310,9 +310,7 @@ def status(request):
     """
     pid = None
 
-    #proc = Popen(["/usr/bin/pgrep", "-U", "dlna", "-f", "serviio"], stdout=PIPE, stderr=PIPE)
-
-    proc = Popen(["/usr/bin/pgrep -U dlna -f serviio"], stdout=PIPE, stderr=PIPE)
+    proc = Popen(["/usr/bin/pgrep", "-U", "dlna", "-F", "/var/run/serviio.pid"], stdout=PIPE, stderr=PIPE)
 
     stdout = proc.communicate()[0]
 
