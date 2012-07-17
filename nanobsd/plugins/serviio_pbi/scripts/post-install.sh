@@ -40,8 +40,8 @@ chmod 775 /usr/pbi/serviio-`uname -m`/MEDIA
 # Add JAIL_IP into /usr/pbi/sbin/serviiod
 # Probably should add JAIL_IP line into serviiod
 
-JAIL_IP=`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}')
-`
+JAIL_IP=`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}'`
+
 sed -i '' -e "21a\\
 JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" /usr/pbi/serviio-`uname -m`/sbin/serviiod
 
