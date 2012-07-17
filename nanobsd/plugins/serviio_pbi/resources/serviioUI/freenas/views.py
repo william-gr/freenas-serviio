@@ -1,7 +1,9 @@
 from subprocess import Popen, PIPE
+import ctypes
 import json
 import os
 import re
+import signal
 import sys
 import time
 
@@ -177,21 +179,32 @@ def start(request):
     except IndexError:
         serviio = models.Serviio.objects.create(enable=True)
 
-#    try:
-#        form = forms.ServiioForm(serviio.__dict__, instance=serviio, jail=jail)
-#        form.is_valid()
-#        form.save()
-#    except ValueError:
-#        return HttpResponse(simplejson.dumps({
-#            'error': True,
-#            'message': 'Serviio data did not validate, please configure it first.',
-#            }), content_type='application/json')
+    try:
+        form = forms.ServiioForm(serviio.__dict__, instance=serviio, jail=jail)
+        form.is_valid()
+        form.save()
+    except ValueError:
+        return HttpResponse(simplejson.dumps({
+            'error': True,
+            'message': 'Serviio data did not validate, please configure it first.',
+            }), content_type='application/json')
 
+
+    libc = ctypes.cdll.LoadLibrary("libc.so.7")
+    omask = (ctypes.c_uint32 * 4)(0, 0, 0, 0)
+    mask = (ctypes.c_uint32 * 4)(0, 0, 0, 0)
+    pmask = ctypes.pointer(mask)
+    pomask = ctypes.pointer(omask)
+    libc.sigprocmask(signal.SIGQUIT, pmask, pomask)
     cmd = "%s onestart" % utils.serviio_control
-    pipe = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE,
-        shell=True, close_fds=True)
+    _popen = os.popen(cmd)
+    #pipe = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE,
+    #    shell=True)
 
-    out = pipe.communicate()[0]
+
+    out = ''
+    time.sleep(3)
+    libc.sigprocmask(signal.SIGQUIT, pomask, None)
     return HttpResponse(simplejson.dumps({
         'error': False,
         'message': out,
