@@ -36,6 +36,11 @@ pw useradd dlna -g dlna -G wheel -s /usr/local/bin/bash -d /usr/pbi/serviio-`una
 chown dlna:dlna /usr/pbi/serviio-`uname -m`/MEDIA
 chmod 775 /usr/pbi/serviio-`uname -m`/MEDIA
 
+# Copy patched RC file over automatically generated one
+mkdir -p /usr/pbi/serviio-`uname -m`/etc/rc.d/
+chmod 755 /usr/pbi/serviio-`uname -m`/serviio.RC
+cp /usr/pbi/serviio-`uname -m`/serviio.RC /usr/pbi/serviio-`uname -m`/etc/rc.d/serviio
+
 
 # Add JAIL_IP into /usr/pbi/sbin/serviiod
 # Probably should add JAIL_IP line into serviiod
@@ -45,10 +50,9 @@ JAIL_IP=`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $
 sed -i '' -e "21a\\
 JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" /usr/pbi/serviio-`uname -m`/sbin/serviiod
 
+echo $JAIL_IP"	"`hostname` >> /etc/hosts
+
 echo 'serviio_flags=""' > /usr/pbi/serviio-`uname -m`/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
 
-/usr/pbi/serviio-`uname -m`/bin/python /usr/pbi/serviio-`uname -m`/serviioUI/manage.py syncdb --migrate --noinput
-
-# An extra time in case the first fails??
 /usr/pbi/serviio-`uname -m`/bin/python /usr/pbi/serviio-`uname -m`/serviioUI/manage.py syncdb --migrate --noinput
