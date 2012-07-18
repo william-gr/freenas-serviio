@@ -30,8 +30,8 @@ pw useradd dlna -g dlna -G wheel -s /usr/local/bin/bash -d /usr/pbi/serviio-`una
 #chmod 775 /usr/pbi/serviio-`uname -m`/var/log
 #chmod 775 /usr/pbi/serviio-`uname -m`/var/db
 
-chmod 775 /usr/pbi/serviio-`uname -m`/etc/mail
-chmod 664 /usr/pbi/serviio-`uname -m`/etc/mail/aliases
+#chmod 775 /usr/pbi/serviio-`uname -m`/etc/mail
+#chmod 664 /usr/pbi/serviio-`uname -m`/etc/mail/aliases
 
 chown dlna:dlna /usr/pbi/serviio-`uname -m`/MEDIA
 chmod 775 /usr/pbi/serviio-`uname -m`/MEDIA
@@ -48,4 +48,7 @@ JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" /usr/pbi/serviio-`u
 echo 'serviio_flags=""' > /usr/pbi/serviio-`uname -m`/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
 
+/usr/pbi/serviio-`uname -m`/bin/python /usr/pbi/serviio-`uname -m`/serviioUI/manage.py syncdb --migrate --noinput
+
+# An extra time in case the first fails??
 /usr/pbi/serviio-`uname -m`/bin/python /usr/pbi/serviio-`uname -m`/serviioUI/manage.py syncdb --migrate --noinput
