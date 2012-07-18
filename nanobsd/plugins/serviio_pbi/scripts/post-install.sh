@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# New strategy, put syncdb first to see if it works here
+/usr/pbi/serviio-`uname -m`/bin/python /usr/pbi/serviio-`uname -m`/serviioUI/manage.py syncdb --migrate --noinput
+
 echo libz.so.4 libz.so.5 > /etc/libmap.conf
 echo libz.so.4 libz.so.5 > /usr/pbi/serviio-`uname -m`/etc/libmap.conf
 
@@ -41,7 +44,6 @@ mkdir -p /usr/pbi/serviio-`uname -m`/etc/rc.d/
 chmod 755 /usr/pbi/serviio-`uname -m`/serviio.RC
 cp /usr/pbi/serviio-`uname -m`/serviio.RC /usr/pbi/serviio-`uname -m`/etc/rc.d/serviio
 
-
 # Add JAIL_IP into /usr/pbi/sbin/serviiod
 # Probably should add JAIL_IP line into serviiod
 
@@ -54,5 +56,3 @@ echo $JAIL_IP"	"`hostname` >> /etc/hosts
 
 echo 'serviio_flags=""' > /usr/pbi/serviio-`uname -m`/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
-
-/usr/pbi/serviio-`uname -m`/bin/python /usr/pbi/serviio-`uname -m`/serviioUI/manage.py syncdb --migrate --noinput
