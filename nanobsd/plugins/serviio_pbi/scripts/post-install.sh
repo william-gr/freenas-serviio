@@ -55,9 +55,8 @@ sed -i '' -e "22a\\
 JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
 
 
-# Need to improve this in case hostname had another ip address or address had a different hostname
-if [ `grep -c $JAIL_IP /etc/hosts` -eq 0 ]
-    echo $JAIL_IP"	"`hostname` >> /etc/hosts
+if ! cat /etc/hosts | egrep "\\b$(hostname)\\b" > /dev/null; then
+    echo "127.0.0.1\t`hostname`" >> /etc/hosts
 fi
 
 echo 'serviio_flags=""' > ${SERVIIO_HOME}/etc/rc.conf
