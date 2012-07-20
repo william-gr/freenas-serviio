@@ -42,17 +42,21 @@ chmod 775 /usr/pbi/serviio-`uname -m`/MEDIA
 # Copy patched RC file over automatically generated one
 mkdir -p /usr/pbi/serviio-`uname -m`/etc/rc.d/
 chmod 755 /usr/pbi/serviio-`uname -m`/serviio.RC
-cp /usr/pbi/serviio-`uname -m`/serviio.RC /usr/pbi/serviio-`uname -m`/etc/rc.d/serviio
+mv /usr/pbi/serviio-`uname -m`/serviio.RC /usr/pbi/serviio-`uname -m`/etc/rc.d/serviio
 
-# Add JAIL_IP into /usr/pbi/sbin/serviiod
-# Probably should add JAIL_IP line into serviiod
-
-JAIL_IP=`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}'`
+# The following 2 sed commands let Serviio determine the Jail IP address and add it to the JAVA_OPTS used to start Serviio
 
 sed -i '' -e "21a\\
+JAIL_IP=\`ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}\'" /usr/pbi/serviio-`uname -m`/sbin/serviiod
+
+sed -i '' -e "22a\\
 JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" /usr/pbi/serviio-`uname -m`/sbin/serviiod
 
-echo $JAIL_IP"	"`hostname` >> /etc/hosts
+
+# Need to improve this in case hostname had another ip address or address had a different hostname
+if [ `grep -c $JAIL_IP /etc/hosts` -eq 0 ]
+    echo $JAIL_IP"	"`hostname` >> /etc/hosts
+fi
 
 echo 'serviio_flags=""' > /usr/pbi/serviio-`uname -m`/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
