@@ -38,6 +38,9 @@ pw useradd dlna -g dlna -G wheel -s /usr/local/bin/bash -d ${SERVIIO_HOME}/etc/s
 #chmod 775 ${SERVIIO_HOME}/etc/mail
 #chmod 664 ${SERVIIO_HOME}/etc/mail/aliases
 
+mkdir -p ${SERVIIO_HOME}/var/tmp
+ln -s ${SERVIIO_HOME}/var/tmp /var/tmp 
+
 chown dlna:dlna ${SERVIIO_HOME}/MEDIA
 chmod 775 ${SERVIIO_HOME}/MEDIA
 
@@ -57,9 +60,9 @@ JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=\${JAIL_IP}\"" ${SERVIIO_HOME}/sb
 sed -i '' -e "s,exec java,exec ${SERVIIO_HOME}/bin/java,g" ${SERVIIO_HOME}/sbin/serviiod
 
 
-if ! cat /etc/hosts | egrep "\\b$(hostname)\\b" > /dev/null; then
-    echo "127.0.0.1\t`hostname`" >> /etc/hosts
-fi
+#if [ `grep -c $JAIL_IP /etc/hosts` -eq 0 ]
+    echo $JAIL_IP"	"`hostname` >> /etc/hosts
+#fi
 
 echo 'serviio_flags=""' > ${SERVIIO_HOME}/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
