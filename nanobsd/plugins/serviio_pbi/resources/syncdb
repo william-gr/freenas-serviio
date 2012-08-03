@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/pbi/serviio-amd64/bin/python /usr/pbi/serviio-amd64/serviioUI/manage.py syncdb --migrate --noinput
