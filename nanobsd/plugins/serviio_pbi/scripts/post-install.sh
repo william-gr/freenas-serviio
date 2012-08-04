@@ -61,11 +61,13 @@ sed -i '' -e "s,exec java,exec ${SERVIIO_HOME}/bin/java,g" ${SERVIIO_HOME}/sbin/
 
 
 #if [ `grep -c $JAIL_IP /etc/hosts` -eq 0 ]
-    echo $JAIL_IP"	"`hostname` >> /etc/hosts
 #fi
+
+echo $JAIL_IP"	"`hostname` >> /etc/hosts
 
 echo 'serviio_flags=""' > ${SERVIIO_HOME}/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
 
 # Create TEST video from uuencoded archive
 uudecode -i -o ${SERVIIO_HOME}/TEST/ServiioTest.mp4 ${SERVIIO_HOME}/TEST/ServiioTest.uue
+rm ${SERVIIO_HOME}/TEST/ServiioTest.uue
