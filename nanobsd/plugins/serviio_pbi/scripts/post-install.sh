@@ -32,14 +32,14 @@ mkdir -p ${SERVIIO_HOME}/etc/serviio/home
 pw groupadd dlna
 pw useradd dlna -g dlna -G wheel -s /usr/local/bin/bash -d ${SERVIIO_HOME}/etc/serviio/home -w none
 
-#chmod 775 ${SERVIIO_HOME}/var/log
-#chmod 775 ${SERVIIO_HOME}/var/db
+if [ ! -e /var/tmp ]; then
+    mkdir -p /var/tmp 
+fi
 
-#chmod 775 ${SERVIIO_HOME}/etc/mail
-#chmod 664 ${SERVIIO_HOME}/etc/mail/aliases
-
-mkdir -p ${SERVIIO_HOME}/var/tmp
-ln -s ${SERVIIO_HOME}/var/tmp /var/tmp 
+if [ ! -e ${SERVIIO_HOME}/var/tmp ]; then
+    mkdir -p ${SERVIIO_HOME}/var
+    ln -s /var/tmp ${SERVIIO_HOME}/var/tmp         
+fi
 
 chown dlna:dlna ${SERVIIO_HOME}/MEDIA
 chmod 775 ${SERVIIO_HOME}/MEDIA
@@ -55,7 +55,7 @@ sed -i '' -e "21a\\
 JAIL_IP=\`ifconfig | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print \$2}'\`" ${SERVIIO_HOME}/sbin/serviiod
 
 sed -i '' -e "22a\\
-JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=\${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
+JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
 
 sed -i '' -e "s,exec java,exec ${SERVIIO_HOME}/bin/java,g" ${SERVIIO_HOME}/sbin/serviiod
 
