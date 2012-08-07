@@ -3,7 +3,7 @@
 SERVIIO_HOME=/usr/pbi/serviio-`uname -m`
 
 # New strategy, put syncdb first to see if it works here
-${SERVIIO_HOME}/bin/python ${SERVIIO_HOME}/serviioUI/manage.py syncdb --migrate --noinput
+env -i ${SERVIIO_HOME}/bin/python ${SERVIIO_HOME}/serviioUI/manage.py syncdb --migrate --noinput
 
 echo libz.so.4 libz.so.5 > /etc/libmap.conf
 echo libz.so.4 libz.so.5 > ${SERVIIO_HOME}/etc/libmap.conf
@@ -32,6 +32,7 @@ mkdir -p ${SERVIIO_HOME}/etc/serviio/home
 pw groupadd dlna
 pw useradd dlna -g dlna -G wheel -s /usr/local/bin/bash -d ${SERVIIO_HOME}/etc/serviio/home -w none
 
+# Fixes HD transcoding error reported in forums
 if [ ! -e /var/tmp ]; then
     mkdir -p /var/tmp 
 fi
@@ -52,10 +53,10 @@ mv ${SERVIIO_HOME}/serviio.RC ${SERVIIO_HOME}/etc/rc.d/serviio
 # The following 2 sed commands let Serviio determine the Jail IP address and add it to the JAVA_OPTS used to start Serviio
 
 sed -i '' -e "21a\\
-JAIL_IP=\`ifconfig | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print \$2}'\`" ${SERVIIO_HOME}/sbin/serviiod
+JAIL_IP=\`ifconfig | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}'\`" ${SERVIIO_HOME}/sbin/serviiod
 
 sed -i '' -e "22a\\
-JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
+JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=\${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
 
 sed -i '' -e "s,exec java,exec ${SERVIIO_HOME}/bin/java,g" ${SERVIIO_HOME}/sbin/serviiod
 
