@@ -42,6 +42,11 @@ if [ ! -e ${SERVIIO_HOME}/var/tmp ]; then
     ln -s /var/tmp ${SERVIIO_HOME}/var/tmp         
 fi
 
+if [ ! -e /var/db/serviio ]; then
+    mkdir -p /var/db/serviio
+    chown -R dlna:dlna /var/db/serviio
+fi
+
 chown dlna:dlna ${SERVIIO_HOME}/MEDIA
 chmod 775 ${SERVIIO_HOME}/MEDIA
 
