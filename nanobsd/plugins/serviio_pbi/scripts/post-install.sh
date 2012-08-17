@@ -71,7 +71,7 @@ sed -i '' -e "s,exec java,exec ${SERVIIO_HOME}/bin/java,g" ${SERVIIO_HOME}/sbin/
 #if [ `grep -c $JAIL_IP /etc/hosts` -eq 0 ]
 #fi
 
-echo $JAIL_IP"	"`hostname` >> /etc/hosts
+#echo $JAIL_IP"	"`hostname` >> /etc/hosts
 
 echo 'serviio_flags=""' > ${SERVIIO_HOME}/etc/rc.conf
 echo 'serviio_flags=""' > /etc/rc.conf
