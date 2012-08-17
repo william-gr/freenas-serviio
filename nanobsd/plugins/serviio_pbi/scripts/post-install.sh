@@ -56,12 +56,14 @@ chmod 755 ${SERVIIO_HOME}/serviio.RC
 mv ${SERVIIO_HOME}/serviio.RC ${SERVIIO_HOME}/etc/rc.d/serviio
 
 # The following 2 sed commands let Serviio determine the Jail IP address and add it to the JAVA_OPTS used to start Serviio
-
-sed -i '' -e "21a\\
-JAIL_IP=\`ifconfig | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}'\`" ${SERVIIO_HOME}/sbin/serviiod
+# Temporarily disabled, not working consistently
+#sed -i '' -e "21a\\
+#JAIL_IP=\`ifconfig | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}'\`" ${SERVIIO_HOME}/sbin/serviiod
+#sed -i '' -e "22a\\
+#JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=\${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
 
 sed -i '' -e "22a\\
-JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=\${JAIL_IP}\"" ${SERVIIO_HOME}/sbin/serviiod
+JAVA_OPTS=\"\${JAVA_OPTS} -Dserviio.remoteHost=0.0.0.0\"" ${SERVIIO_HOME}/sbin/serviiod
 
 sed -i '' -e "s,exec java,exec ${SERVIIO_HOME}/bin/java,g" ${SERVIIO_HOME}/sbin/serviiod
 
