@@ -82,24 +82,24 @@ rm ${SERVIIO_HOME}/TEST/ServiioTest.uue
 
 # None of the bleeping damn libraries for ffmpeg are linking in the jail, doing manually
 
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libavdevice*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libavfilter*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libavformat*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libavcodec*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libpostproc*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libswscale*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libavutil*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libX11*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libXext*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libXfixes*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libopencv*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libfreetype*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "librtmp*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libxvid*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libx264*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libvpx*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libvorbis*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libtheora*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libschroedinger*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libopenjpeg*" -exec ln -s {} /usr/local/lib/ \;
-find /usr/pbi/${SERVIIO_HOME}/lib -name "libmp3lame*" -exec ln -s {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libavdevice*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libavfilter*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libavformat*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libavcodec*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libpostproc*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libswscale*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libavutil*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libX11*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libXext*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libXfixes*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libopencv*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libfreetype*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "librtmp*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libxvid*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libx264*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libvpx*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libvorbis*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libtheora*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libschroedinger*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libopenjpeg*" -exec ln -sf {} /usr/local/lib/ \;
+find /usr/pbi/${SERVIIO_HOME}/lib -name "libmp3lame*" -exec ln -sf {} /usr/local/lib/ \;
