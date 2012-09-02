@@ -53,3 +53,14 @@ VORBIS
 * VPX
 X264
 XVID
+
+You'll need to update these ports:
+
+multimedia/rtmpdump to 2.41
+
+
+After you grab the FreeNAS source tree, you'll need to edit a
+couple of the scripts and add a "target" for Serviio. They are:
+
+8.2.0/build/do_build.sh
+8.2.0/nanobsd/plugins/Makefile
