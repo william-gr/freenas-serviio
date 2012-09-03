@@ -6,15 +6,15 @@ Build Notes:
 Even if you use OpenJDK, Diablo_JRE is still required to compile it.
 This means you still need to get:
 
-*diablo-caffe-freebsd7-amd64-1.6.0_07-b02.tar.bz2
+diablo-caffe-freebsd7-amd64-1.6.0_07-b02.tar.bz2
 
-*diablo-caffe-freebsd7-i386-1.6.0_07-b02.tar.bz2
+diablo-caffe-freebsd7-i386-1.6.0_07-b02.tar.bz2
 
-*diablo-jdk-freebsd7.amd64.1.6.0.07.02.tbz
+diablo-jdk-freebsd7.amd64.1.6.0.07.02.tbz
 
-*diablo-latte-freebsd7-i386-1.6.0_07-b02.tar.bz2
+diablo-latte-freebsd7-i386-1.6.0_07-b02.tar.bz2
 
-*tzupdater-1_3_45-2011n.zip
+tzupdater-1_3_45-2011n.zip
 
 Download them from here:
 
@@ -42,21 +42,21 @@ and run "make config" in ports/multimedia/ffmpeg and make sure to
 select the following options, some are the default, ones with an
 asterix are optional but required:
 
-*FFSERVER
-*FONTCONFIG
-*FREETYPE
-*FREI0R
+* FFSERVER
+* FONTCONFIG
+* FREETYPE
+* FREI0R
 *GNUTLS
-** LAME
-*OPENCV
-** OPENJPEG
-** RTMP
-*SCHROEDINGER
-*THEORA
-*VORBIS
-** VPX
-*X264
-*XVID
+* * LAME
+* OPENCV
+* * OPENJPEG
+* * RTMP
+* SCHROEDINGER
+* THEORA
+* VORBIS
+* * VPX
+* X264
+* XVID
 
 You'll need to update these ports:
 
