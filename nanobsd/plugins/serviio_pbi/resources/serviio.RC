@@ -21,7 +21,7 @@ command=/usr/pbi/serviio-$(uname -m)/sbin/serviiod
 
 load_rc_config $name
 
-serviio_user=${serviio_user-"dlna"}
+serviio_user=${serviio_user="dlna"}
 
 _dirs="/var/db/serviio /var/log/serviio"
 
