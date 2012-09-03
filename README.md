@@ -7,9 +7,13 @@ Even if you use OpenJDK, Diablo_JRE is still required to compile it.
 This means you still need to get:
 
 diablo-caffe-freebsd7-amd64-1.6.0_07-b02.tar.bz2
+
 diablo-caffe-freebsd7-i386-1.6.0_07-b02.tar.bz2
+
 diablo-jdk-freebsd7.amd64.1.6.0.07.02.tbz
+
 diablo-latte-freebsd7-i386-1.6.0_07-b02.tar.bz2
+
 tzupdater-1_3_45-2011n.zip
 
 Download them from here:
@@ -63,4 +67,5 @@ After you grab the FreeNAS source tree, you'll need to edit a
 couple of the scripts and add a "target" for Serviio. They are:
 
 8.2.0/build/do_build.sh
+
 8.2.0/nanobsd/plugins/Makefile
