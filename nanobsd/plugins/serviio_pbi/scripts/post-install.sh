@@ -85,6 +85,7 @@ uudecode -i -o ${SERVIIO_HOME}/TEST/ServiioTest.mp4 ${SERVIIO_HOME}/TEST/Serviio
 rm ${SERVIIO_HOME}/TEST/ServiioTest.uue
 
 # None of the bleeping damn libraries for ffmpeg are linking in the jail, doing manually
+# This actually needs to be added to ${SERVIIO_HOME}/sbin/serviiod with sed so it gets run everytime.
 
 ldconfig -m /usr/pbi/${SERVIIO_HOME}/lib/
 
